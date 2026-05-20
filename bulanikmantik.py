@@ -6,17 +6,16 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Akıllı Restoran Ambiyans Sistemi", layout="wide")
 
-# --- 1. BULANIK MANTIK SİSTEMİ TANIMLAMALARI ---
-# Giriş Değişkenleri (Antecedents)
+
 musteri = ctrl.Antecedent(np.arange(0, 101, 1), 'Müşteri Yoğunluğu (%)')
 gurultu = ctrl.Antecedent(np.arange(40, 101, 1), 'Ortam Gürültüsü (dB)')
 isik = ctrl.Antecedent(np.arange(0, 101, 1), 'Doğal Işık (%)')
 
-# Çıkış Değişkenleri (Consequents)
+
 aydinlatma = ctrl.Consequent(np.arange(0, 101, 1), 'Aydınlatma Parlaklığı (%)')
 muzik = ctrl.Consequent(np.arange(0, 101, 1), 'Müzik Ses Seviyesi (%)')
 
-# Üyelik Fonksiyonları (Üçgen - trimf)
+
 musteri['Tenha'] = fuzz.trimf(musteri.universe, [0, 0, 50])
 musteri['Normal'] = fuzz.trimf(musteri.universe, [20, 50, 80])
 musteri['Kalabalık'] = fuzz.trimf(musteri.universe, [50, 100, 100])
@@ -37,19 +36,19 @@ muzik['Kısık'] = fuzz.trimf(muzik.universe, [0, 0, 40])
 muzik['Orta'] = fuzz.trimf(muzik.universe, [30, 50, 70])
 muzik['Yüksek'] = fuzz.trimf(muzik.universe, [60, 100, 100])
 
-# Kurallar (Örnek olarak ilk 5 kuralı ekledim, raporuna göre hepsini ekleyebilirsin)
+
 kural1 = ctrl.Rule(musteri['Kalabalık'] & gurultu['Gürültülü'] & isik['Karanlık'], (aydinlatma['Parlak'], muzik['Yüksek']))
 kural2 = ctrl.Rule(musteri['Kalabalık'] & gurultu['Gürültülü'] & isik['Aydınlık'], (aydinlatma['Loş'], muzik['Yüksek']))
 kural3 = ctrl.Rule(musteri['Kalabalık'] & gurultu['Uğultulu'] & isik['Loş'], (aydinlatma['Normal'], muzik['Orta']))
 kural4 = ctrl.Rule(musteri['Tenha'] & gurultu['Sessiz'] & isik['Karanlık'], (aydinlatma['Loş'], muzik['Kısık']))
 kural5 = ctrl.Rule(musteri['Normal'] & gurultu['Sessiz'] & isik['Aydınlık'], (aydinlatma['Loş'], muzik['Kısık']))
-# NOT: Diğer 10 kuralı aynı bu formatta alt alta eklemelisin.
 
-# Kontrol Sistemi
-ambiyans_ctrl = ctrl.ControlSystem([kural1, kural2, kural3, kural4, kural5]) # Eklediğin kuralları buraya yaz
+
+
+ambiyans_ctrl = ctrl.ControlSystem([kural1, kural2, kural3, kural4, kural5]) 
 ambiyans_sim = ctrl.ControlSystemSimulation(ambiyans_ctrl)
 
-# --- 2. STREAMLIT ARAYÜZÜ ---
+
 st.title("🍽️ Akıllı Restoran Ambiyans Kontrolörü (Bulanık Mantık)")
 st.markdown("Bu sistem ortamdaki **Müşteri Yoğunluğu**, **Gürültü** ve **Işık** seviyelerini alarak restoranın **Müzik** ve **Aydınlatma** seviyelerini bulanık mantıkla otomatik ayarlar.")
 
@@ -66,21 +65,21 @@ with col1:
 with col2:
     st.header("Sistem Çıktıları")
     if hesapla_btn:
-        # Değerleri sisteme ver
+        
         ambiyans_sim.input['Müşteri Yoğunluğu (%)'] = val_musteri
         ambiyans_sim.input['Ortam Gürültüsü (dB)'] = val_gurultu
         ambiyans_sim.input['Doğal Işık (%)'] = val_isik
         
-        # Durulaştırma (Defuzzification) hesaplamasını yap (Centroid metodu varsayılandır)
+        
         ambiyans_sim.compute()
         
-        # Sonuçları göster
+       
         st.metric(label="💡 Önerilen Aydınlatma Parlaklığı", value=f"% {ambiyans_sim.output['Aydınlatma Parlaklığı (%)']:.2f}")
         st.metric(label="🎵 Önerilen Müzik Ses Seviyesi", value=f"% {ambiyans_sim.output['Müzik Ses Seviyesi (%)']:.2f}")
 
 st.divider()
 
-# --- 3. GRAFİKSEL GÖSTERİMLER (Hocanın İstediği Kısım) ---
+
 if hesapla_btn:
     st.subheader("Bulanıklaştırma ve Durulaştırma Grafikleri")
     g_col1, g_col2 = st.columns(2)
