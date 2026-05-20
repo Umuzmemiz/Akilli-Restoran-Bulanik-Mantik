@@ -9,7 +9,7 @@
 
 
 
-Bu proje, bir restoranın fiziksel ortam koşullarını (müşteri yoğunluğu, gürültü ve gün ışığı) anlık olarak analiz ederek, içerideki **Aydınlatma Parlaklığını** ve **Müzik Ses Seviyesini** insan mantığına en uygun şekilde otomatik ayarlayan **Bulanık Mantık (Fuzzy Logic)** tabanlı bir karar destek sistemidir. 
+Bu proje, bir restoranın fiziksel ortam koşullarını (müşteri yoğunluğu, gürültü ve gün ışığı) anlık olarak analiz ederek, içerideki Aydınlatma Parlaklığını ve Müzik Ses Seviyesini insan mantığına en uygun şekilde otomatik ayarlayan Bulanık Mantık  tabanlı bir karar destek sistemidir. 
 
 Geleneksel kesin sınırları olan (1/0 veya Aç/Kapat) algoritmaların aksine, bu sistem "biraz kalabalık", "hafif uğultulu" gibi insani kavramları modelleyerek yumuşak geçişler sağlar ve maksimum müşteri konforunu hedefler.
 
