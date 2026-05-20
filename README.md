@@ -2,6 +2,9 @@
 
 <img width="1896" height="635" alt="image" src="https://github.com/user-attachments/assets/9b47609c-a727-484d-8a2b-a162efdcd129" />
 
+<img width="1815" height="598" alt="image" src="https://github.com/user-attachments/assets/8858a389-170d-4577-af0c-ee73016460b5" />
+
+
 
 Bu proje, bir restoranın fiziksel ortam koşullarını (müşteri yoğunluğu, gürültü ve gün ışığı) anlık olarak analiz ederek, içerideki **Aydınlatma Parlaklığını** ve **Müzik Ses Seviyesini** insan mantığına en uygun şekilde otomatik ayarlayan **Bulanık Mantık (Fuzzy Logic)** tabanlı bir karar destek sistemidir. 
 
